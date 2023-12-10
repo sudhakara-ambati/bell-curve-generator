@@ -3,14 +3,17 @@ from matplotlib.figure import Figure
 from matplotlib.backends.backend_agg import FigureCanvasAgg
 from scipy.stats import norm
 
-def generate_grade_boundaries(marks, num_grades):
+def generate_grade_boundaries(marks: list, num_grades: int):
     percentiles = np.percentile(marks, np.linspace(0, 100, num_grades))
     percentiles = np.append(percentiles, 100)
     percentiles = np.insert(percentiles, 0, 0)
     return percentiles
     
-def create_curve(data, mxscore, mnscore, num_grades):
-    marks = np.array([72, 41, 63, 71, 81, 68, 60, 74, 52, 67, 33, 65, 78, 59, 70, 82, 55, 75, 48, 72, 25, 71, 67, 63, 70, 89, 63, 58, 45, 72, 70, 88, 42, 68, 76, 62, 73, 64, 77, 73, 54, 65, 78, 82, 67, 79, 50, 70, 85, 71, 65, 58, 63, 61, 84, 71, 73, 65, 70, 48, 64, 71, 76, 65, 77, 79, 72, 69, 64, 73, 68, 74, 65, 78, 85, 59, 70, 62, 68, 71, 82, 59, 67, 70, 82, 65, 63, 63, 70, 71, 54, 64, 73, 65, 76, 67, 77, 64, 58, 72])
+def create_curve(data: list, mxscore: int, mnscore: int, num_grades: int) -> Figure:
+    max_input_marks = 50
+    input_marks = np.array([10, 4, 18, 7, 20, 15, 3, 11, 6, 12, 2, 16, 9, 5, 19, 8, 1, 14, 0, 13, 17, 9, 5, 18, 11, 20, 8, 12, 6, 15, 3, 16, 7, 14, 1, 13, 10, 0, 19, 2, 17, 4, 15, 7, 11, 20, 4, 17, 6, 14, 3, 10, 12, 8, 18, 9, 1, 13, 0, 19, 16, 5, 2, 8, 12, 7, 14, 11, 1, 18, 4, 20, 10, 15, 0, 17, 6, 9, 3, 13, 5, 19, 16, 2, 10, 8, 14, 1, 18, 6, 12, 9, 5, 11, 0, 15, 4, 20, 7, 16, 3, 19, 6, 12, 1, 14, 11, 8, 17, 3, 9, 5, 18, 13, 2, 7, 15, 0, 20, 10, 16, 4, 19, 12, 6, 11, 3, 14, 7, 10, 1, 18, 5, 9, 2, 15, 8, 20, 13, 0, 17, 4, 16, 6, 12, 9, 14, 3, 19, 11, 1, 18, 5, 10, 7, 13, 0, 15, 8, 20, 2, 17, 4, 16, 9, 6, 12, 1, 18, 5, 11, 7, 14, 3, 19, 0, 15, 8, 20, 10, 17, 4, 16, 6, 12, 2, 18, 5, 11, 7, 14, 3, 19, 0, 15, 8, 20, 10, 17, 4, 16, 6, 12, 2, 18, 5, 11, 7, 14, 3, 19, 0, 15, 8, 20])
+    marks = input_marks * (100/max_input_marks)
+    max_marks = max_input_marks * (100/max_input_marks)
     num_grades = 7
     grade_boundaries = generate_grade_boundaries(marks, num_grades)
     mean = np.mean(marks)
@@ -20,7 +23,7 @@ def create_curve(data, mxscore, mnscore, num_grades):
     
     fig = Figure(figsize=(8, 6))
     FigureCanvasAgg(fig)  # Create a canvas for the figure
-    ax = fig.add_subplot(111)
+    ax = fig.add_subplot(111)   
     
     ax.plot(x, y, color='black', linestyle='dashed', label='Bell Curve')
     colors = ['darkred', 'red', 'orange', 'yellow', 'yellowgreen', 'lime', 'cyan']
@@ -46,6 +49,6 @@ def create_curve(data, mxscore, mnscore, num_grades):
     ax.set_ylabel('Probability Density')
     ax.set_title('Bell Curve for Student Marks')
     ax.grid(True)
-    
+    ax.margins(0,0)
     return fig
 
