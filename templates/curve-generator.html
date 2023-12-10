@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block title %} Welcome to the home page {% endblock %}
+
+{% block body %}
+
+{% if error %}
+    <h3>Error: {{ error }}</h3>
+{% else %}
+{%endif%}
+
+<form method="post">
+    <label for="mxscore">Max Score:</label>
+    <br>
+    <input type="text" name="mxscore"
+           placeholder="100"
+           value="{{ request.form['mxscore'] }}"></input>
+    <br>
+
+    <label for="mnscore">Min Score:</label>
+    <br>
+    <input type="text" name="mnscore"
+           placeholder="0"
+           value="{{ request.form['mnscore'] }}"></input>
+    <br>
+    <button type="submit">Submit</button>
+</form>
+
+
+
+{% endblock %}
