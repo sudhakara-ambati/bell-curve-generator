@@ -12,20 +12,24 @@
 <form method="post">
     <label for="mxscore">Max Score:</label>
     <br>
-    <input type="text" name="mxscore"
+    <input type="number" name="mxscore"
            placeholder="100"
            value="{{ request.form['mxscore'] }}"></input>
     <br>
 
     <label for="mnscore">Min Score:</label>
     <br>
-    <input type="text" name="mnscore"
+    <input type="number" name="mnscore"
            placeholder="0"
            value="{{ request.form['mnscore'] }}"></input>
     <br>
     <button type="submit">Submit</button>
 </form>
+<br>
 
-
+{% if image %}
+    <img src={{ image }} alt="Chart" height="480" width="640">
+{% else %}
+{%endif%}
 
 {% endblock %}
