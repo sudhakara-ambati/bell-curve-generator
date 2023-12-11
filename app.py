@@ -41,5 +41,3 @@ def curve_generator():
                 pass
 
     return render_template('curve-generator.html', error=error, image=pngImageB64String)
-
-# Rest of your code...
