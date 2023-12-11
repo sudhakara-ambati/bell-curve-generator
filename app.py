@@ -5,6 +5,8 @@ from matplotlib.backends.backend_agg import FigureCanvasAgg as FigureCanvas
 
 app = Flask(__name__)
 
+select_variables = False
+
 @app.route('/')
 def index():
     return render_template('index.html')
@@ -16,10 +18,16 @@ def curve_generator():
     if request.method == 'POST':
         mxscore = request.form['mxscore']
         mnscore = request.form['mnscore']
-        if mxscore == '' or mnscore == '':
+        input_list = request.form['input_list']
+        select_variables = True
+        if mxscore == '' or mnscore == '' or input_list == '':
             error = 'Please fill in the forms below'
         else:
-            fig = create_curve([0], mxscore, mnscore, 9)
+            print(mxscore)
+            print(mnscore)
+            print(input_list)
+
+            fig = create_curve(input_list, mxscore, mnscore, 7)
             # Convert plot to PNG image
             pngImage = io.BytesIO()
             FigureCanvas(fig).print_png(pngImage)
