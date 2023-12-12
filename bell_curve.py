@@ -11,7 +11,8 @@ def generate_grade_boundaries(marks: list, num_grades: int):
     
 def create_curve(data, mxscore: int, mnscore: int, num_grades: int) -> Figure:
     max_input_marks = int(mxscore)
-    input_marks = np.array(data)
+    data_filtered = [x for x in data if x != max_input_marks]
+    input_marks = np.array(data_filtered)
     marks = input_marks * (100/max_input_marks)
     multiplier = (100/max_input_marks)
     max_marks = max_input_marks * (100/max_input_marks)
@@ -52,8 +53,8 @@ def create_curve(data, mxscore: int, mnscore: int, num_grades: int) -> Figure:
     ax.set_xlim(min(marks), max_input_marks + new_distance)
 
     ax.set_xlabel('Marks')
-    ax.set_ylabel('Probability Density')
     ax.set_title('Bell Curve for Student Marks')
     ax.grid(True)
+    ax.set_yticklabels([])
     ax.margins(0, 0)
     return fig
