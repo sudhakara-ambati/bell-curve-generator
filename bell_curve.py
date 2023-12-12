@@ -47,7 +47,6 @@ def create_curve(data, mxscore: int, mnscore: int, num_grades: int) -> Figure:
             ax.text(prev_boundary + (boundary - prev_boundary) / 2, 0.00025, f'Grade: {i + 1} | {area_percentage:.1f}%', ha='center', va='bottom', color='black', rotation='vertical')
     ax.set_xticks(np.arange(0, 100 + 1, 5))
     ax.set_xlabel('Marks')
-    ax.set_ylabel('Probability Density')
     ax.set_title('Bell Curve for Student Marks')
     ax.grid(True)
     ax.margins(0,0)
