@@ -24,9 +24,6 @@ def curve_generator():
         if mxscore == '' or mnscore == '' or input_list_str == '':
             error = 'Please fill in the forms below'
         else:
-            print(mxscore)
-            print(mnscore)
-            print(input_list_str)
             input_list = list(map(int, input_list_str.split(','))) # map all strs in the list to ints
             if select_variables == True:
                 fig = create_curve(input_list, mxscore, mnscore, 7)
