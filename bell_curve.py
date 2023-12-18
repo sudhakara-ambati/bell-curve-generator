@@ -19,8 +19,13 @@ def create_curve(data, mxscore: int, mnscore: int, num_grades: int) -> Figure:
     grade_boundaries = generate_grade_boundaries(marks, num_grades)
     mean = np.mean(marks)
     std_dev = np.std(marks)
-    x = np.linspace(min(marks), 100, 1000)
-    y = norm.pdf(multiplier * x, mean, std_dev)
+    
+    if multiplier >= 1:
+        x = np.linspace(min(marks), 100, 1000)
+        y = norm.pdf(multiplier * x, mean, std_dev)
+    elif multiplier < 1:
+        x = np.linspace(min(marks), 100, 1000) / multiplier
+        y = norm.pdf(multiplier * x, mean, std_dev) / multiplier
     
     fig = Figure(figsize=(8, 6))
     FigureCanvasAgg(fig)  # Create a canvas for the figure
@@ -50,7 +55,7 @@ def create_curve(data, mxscore: int, mnscore: int, num_grades: int) -> Figure:
     new_distance = original_interval * multiplier
 
     ax.set_xlim(min(marks), max_input_marks + new_distance)
-
+    ax.set_yticklabels([])
     ax.set_xlabel('Marks')
     ax.set_title('Bell Curve for Student Marks')
     ax.grid(True)
